@@ -1,0 +1,59 @@
+#########################################################################
+# Name of file - 05_collate_weights.R
+#
+# Type - Reproducible Analytical Pipeline (RAP)
+# Written/run on - RStudio Desktop
+# Version of R - 4.4.2
+#
+# Description - Imports all the files containing the calibrated
+# weights (household, random adult, random school child and travel diary)
+# End product is one csv file with all the weights attched to the 
+# correct UNIQID
+
+#########################################################################
+
+# clear environment
+rm(list=ls())
+
+### 0 - Setup ----
+
+# Add message to inform user about progress
+message("Execute collate weights script")
+
+# Run setup script which loads all required packages and functions and 
+# executes the config.R script.
+
+source(here::here("Scripts", "00_setup.R"))
+
+
+### 1 - Import files ----
+
+# Add message to inform user about progress
+message("Data import")
+
+hhwts <- read_csv(here::here("Outputs", "hh_wts_final.csv"))
+
+adwts <- read_csv(here::here("Outputs", "randad_wts_final.csv"))
+
+kidwts <- read_csv(here::here("Outputs", "kids_wts_final.csv"))
+
+travwts <- read_csv(here::here("Outputs", "trav_wts_final.csv"))
+
+
+### 2 - Join the datasets together ----
+
+# Add message to inform user about progress
+message("Joining datasets together")
+
+SHS_wts <- hhwts %>% 
+  full_join(adwts, by = "UNIQID") %>% 
+  full_join(kidwts, by = "UNIQID") %>% 
+  full_join(travwts, by = "UNIQID")
+
+
+### 3 - Export ----
+
+# Add message to inform user about progress
+message("Exporting SHS weights")
+
+write.csv(SHS_wts, here::here("Outputs", paste0("shs_weights_", config$date, ".csv")))
