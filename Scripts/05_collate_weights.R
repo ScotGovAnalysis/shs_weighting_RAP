@@ -40,7 +40,21 @@ kidwts <- read_csv(here::here("Outputs", "kids_wts_final.csv"))
 travwts <- read_csv(here::here("Outputs", "trav_wts_final.csv"))
 
 
-### 2 - Join the datasets together ----
+### 2 - Select the relevant variables ----
+
+message("Tidying the datasets up")
+
+hhwts <- hhwts %>% 
+  select(UNIQID, LA, SHS_hh_wt, SHS_hh_wt_sc)
+
+adwts <- adwts %>% 
+  select(UNIQID, SHS_ind_wt, SHS_ind_wt_sc)
+
+kidwts <- kidwts %>% 
+  select(UNIQID, SHS_kid_wt, SHS_kid_wt_sc)
+
+
+### 3 - Join the datasets together ----
 
 # Add message to inform user about progress
 message("Joining datasets together")
