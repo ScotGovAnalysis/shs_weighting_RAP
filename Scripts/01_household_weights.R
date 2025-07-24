@@ -343,7 +343,8 @@ if (wt_sc_check_mean == 1) {
 message("Exporting household weights")
 
 hhwts <- hhwts %>%
-  select(UNIQID, LA, SHS_hh_wt, SHS_hh_wt_sc)
+  select(UNIQID, pnum, LA, sext, ageband, dweight, preweight, int_SHS_hh_wt, 
+         int_SHS_hh_wt_sc, SHS_hh_wt, SHS_hh_wt_sc)
 
 write_csv(hhwts, here::here("Outputs", "hh_wts_final.csv"))
 
