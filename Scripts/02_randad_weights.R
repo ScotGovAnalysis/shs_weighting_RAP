@@ -1,5 +1,5 @@
 #########################################################################
-# Name of file - 03_randad_weights.R
+# Name of file - 02_randad_weights.R
 #
 # Type - Reproducible Analytical Pipeline (RAP)
 # Written/run on - RStudio Desktop
@@ -274,7 +274,8 @@ if (wt_sc_check_mean == 1) {
 message("Exporting random adult weights")
 
 randad_wts <- result$data %>% 
-  select(UNIQID, SHS_ind_wt, SHS_ind_wt_sc)
+  select(UNIQID, LA, adsex, adageband, numads, preweight, SHS_ind_wt,
+         SHS_ind_wt_sc)
 
 write_csv(randad_wts, here::here("Outputs", "randad_wts_final.csv"))
 
@@ -282,4 +283,6 @@ write_csv(randad_wts, here::here("Outputs", "randad_wts_final.csv"))
 message("Exporting large household weights")
 
 large_randad_wts <- large_wts %>% 
-  write_csv(here::here("Outputs", "large_randad_wts.csv"))
+  select(LA, adsex, adageband, numads, preweight, SHS_ind_wt, SHS_ind_wt_sc)
+
+write_csv(large_randad_wts, here::here("Outputs", "large_randad_wts.csv"))
