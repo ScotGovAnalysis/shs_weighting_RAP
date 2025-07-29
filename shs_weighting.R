@@ -48,7 +48,13 @@ source(here::here("Scripts", "03_randsc_weights.R"))
 source(here::here("Scripts", "04_travel_weights.R"))
 
 
-### 5 - Collate the weights ----
+### 5 - Manual weight checking ----
+
+# Runs the manual weight checking script
+source(here::here("Scripts", "05_manual_weight_checking.R"))
+
+
+### 6 - Collate the weights ----
 
 # Runs the collate weights script
-source(here::here("Scripts", "05_collate_weights.R"))
+source(here::here("Scripts", "06_collate_weights.R"))

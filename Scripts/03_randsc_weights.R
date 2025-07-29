@@ -330,7 +330,15 @@ if (wt_sc_check_mean == 1) {
 message("Exporting random school child weights")
 
 randsc_wts <- result$data %>% 
-  select(UNIQID, LA, numkids, int_dweight, dweight, ageband, preweight, 
+  select(UNIQID, LA, numkids, dweight2, int_dweight, ageband, preweight, 
          SHS_kid_wt, SHS_kid_wt_sc)
 
 write_csv(randsc_wts, here::here("Outputs", "kids_wts_final.csv"))
+
+
+message("Exporting large child weights")
+
+large_randsc_wts <- randsc_wts %>% 
+  select(UNIQID, LA, numkids, ageband, SHS_kid_wt, SHS_kid_wt_sc)
+
+write_csv(large_randsc_wts, here::here("Outputs", "large_randsc_wts.csv"))

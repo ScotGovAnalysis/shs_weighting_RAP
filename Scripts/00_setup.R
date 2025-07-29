@@ -18,9 +18,9 @@ library(lattice)
 library(ReGenesees)
 library(readr)
 library(rlang)
+library(openxlsx)
 require("foreign")
 require("haven")
-
 
 ### 2 - Load functions from functions folder of SHS Weighting RAP ----
 
