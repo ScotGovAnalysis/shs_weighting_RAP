@@ -65,7 +65,7 @@ SHS_wts <- hhwts %>%
   full_join(travwts, by = "UNIQID")
 
 
-### 3 - Export ----
+### 4 - Export ----
 
 # Add message to inform user about progress
 message("Exporting SHS weights")
