@@ -52,7 +52,7 @@ wb <- loadWorkbook(here::here("Outputs", "SHS final weight checking.xlsx"))
 message("Inputting data into workbook")
 
 ### 2 - hhwts tab ----
-hhwts_tab <- hhwts[, 1:7] #selects the 7 columns needed for the hhwts tab
+hhwts_tab <- hhwts[, 1:9] #selects the 9 columns needed for the hhwts tab
 
 writeData(wb, sheet = "hhwts", x = hhwts_tab, startRow = 2, 
           startCol = 2, colNames = FALSE, rowNames = FALSE)
