@@ -45,13 +45,19 @@ travwts <- read_csv(here::here("Outputs", "trav_wts_final.csv"))
 message("Tidying the datasets up")
 
 hhwts <- hhwts %>% 
-  select(UNIQID, LA, SHS_hh_wt, SHS_hh_wt_sc)
+  select(UNIQID, SHS_hh_wt, SHS_hh_wt_sc) %>% 
+  rename(LA_WT = SHS_hh_wt,
+         LA_GRWT = SHS_hh_wt_sc)
 
 adwts <- adwts %>% 
-  select(UNIQID, SHS_ind_wt, SHS_ind_wt_sc)
+  select(UNIQID, SHS_ind_wt, SHS_ind_wt_sc) %>% 
+  rename(IND_WT = SHS_ind_wt,
+         IND_GRWT = SHS_ind_wt_sc)
 
 kidwts <- kidwts %>% 
-  select(UNIQID, SHS_kid_wt, SHS_kid_wt_sc)
+  select(UNIQID, SHS_kid_wt, SHS_kid_wt_sc) %>% 
+  rename(KID_WT = SHS_kid_wt,
+         KID_GRWT = SHS_kid_wt_sc)
 
 
 ### 3 - Join the datasets together ----
