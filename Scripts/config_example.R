@@ -20,9 +20,7 @@ config <- list()
 # (i.e., 20XX)
 config$wyear <- xx
 
-# Date that the RAP is run to produce the weights
-# MUST be changed each time it's run (if on a different day)
-config$date <- xxxx
+config$prevdate <- xx
 
 ### 2 - File paths - TO UPDATE ----
 
@@ -34,42 +32,11 @@ config$datashare.path <- paste0("xxxx")
 # Path to SAS data
 config$sasdata.path <- "xxxx"
 
-### 3 - File names - TO UPDATE ----
-
-# File path to raw data - only need if sub-setting required
-#config$shs_raw.path <- paste0(config$datashare.path, "shs24q4_05.99_toSGforweightingsetup4Apr25.sav") 
+# Path to previous year's folder
+config$prevyear.path <- paste0("xxx", config$prevyear, " xxx", config$prevyear, "/")
 
 
-# File path to NRS mid-year hh population totals
-config$hhpoptotals.path <- paste0(config$datashare.path, "xxxx")
-
-# File path to NRS mid-year ind population totals
-config$indpoptotals.path <- paste0(config$datashare.path, "xxxx")
-
-# File path to NRS mid-year indad population totals
-config$indadpoptotals.path <- paste0(config$datashare.path, "xxxx")
-
-#File path to NRS mid-year ind population totals 
-config$adultpoptotals.path <- paste0(config$datashare.path, "xxxx")
-
-#File path to NRS mid-year child population totals 
-config$kidpoptotals.path <- paste0(config$datashare.path, "xxxx")
-
-
-#File path to household subsetted survey data
-config$hhsurvdata.path <- paste0(config$sasdata.path, "xxxx")
-
-#File path to person subsetted survey data
-config$indsurvdata.path <- paste0(config$sasdata.path, "xxxx")
-
-#File path to random adult subsetted survey data
-config$randadsurvdata.path <- paste0(config$sasdata.path, "xxxx")
-
-#File path to random school child subsetted survey data
-config$randscsurvdata.path <- paste0(config$sasdata.path, "xxxx")
-
-
-### 4 - Survey and population totals - TO UPDATE ----
+### 3 - Survey and population totals - TO UPDATE ----
 
 #Total population of Scotland
 config$pop_total <- xxxx

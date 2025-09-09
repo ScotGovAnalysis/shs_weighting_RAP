@@ -1,8 +1,10 @@
-#' The dweights and preweights are scaled for sexage by LA to poplation estimates via calibration
+#' The dweights and preweights are scaled for sexage by LA to population 
+#' estimates via calibration
 #' 
 #' @param Data frame that needs to be calibrated (hhdata, randad, randsc)
 #' 
-#' @param function contains all the parameters required for the calibration to take place
+#' @param function contains all the parameters required for the calibration 
+#' to take place
 #' 
 #' @returns Dataset with the calibrated weights
 

@@ -11,11 +11,12 @@ distribution_check <- function(data, weight_col) {
   weight_col <- rlang::ensym(weight_col)
   
   data %>%
+    dplyr::ungroup() %>%   # <- removes grouping
     summarise(
       count = n(),
-      sum = sum(!!weight_col, na.rm = TRUE),
-      mean = mean(!!weight_col, na.rm = TRUE),
-      sd = sd(!!weight_col, na.rm = TRUE),
-      IQR = IQR(!!weight_col, na.rm = TRUE)
+      sum   = sum(!!weight_col, na.rm = TRUE),
+      mean  = mean(!!weight_col, na.rm = TRUE),
+      sd    = sd(!!weight_col, na.rm = TRUE),
+      IQR   = IQR(!!weight_col, na.rm = TRUE)
     )
 }

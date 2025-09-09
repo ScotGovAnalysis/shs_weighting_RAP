@@ -13,18 +13,19 @@
 
 library(tidyverse)
 library(dplyr)
+library(here)
 library(janitor)
 library(lattice)
 library(ReGenesees)
 library(readr)
 library(rlang)
 library(openxlsx)
-require("foreign")
-require("haven")
+library(foreign)
+library(haven)
 
 ### 2 - Load functions from functions folder of SHS Weighting RAP ----
 
-walk(list.files(here::here("Functions"), pattern = "\\.R$", full.names = TRUE), 
+walk(list.files(here("Functions"), pattern = "\\.R$", full.names = TRUE), 
      source)
 
 
@@ -33,11 +34,52 @@ walk(list.files(here::here("Functions"), pattern = "\\.R$", full.names = TRUE),
 # The config.R script is the only file which needs to be updated before 
 # the RAP can be run. 
 
-source(here::here("Scripts", "config.R"))
+source(here("Scripts", "config.R"))
 
 
-### 4 - Message style ----
 
-#title <- black $ bold
+### 4 - Non-sensitive file paths needed for SHS Weighting RAP ----
 
-#normal <- black
+# initiate list 
+setup <- list()
+
+# File path to NRS mid-year hh population totals
+setup$hhpoptotals.path <- paste0(config$datashare.path, "hhtotals.csv")
+
+# File path to NRS mid-year ind population totals
+setup$indpoptotals.path <- paste0(config$datashare.path, "SHShhtotals.csv")
+
+# File path to NRS mid-year indad population totals
+setup$indadpoptotals.path <- paste0(config$datashare.path, "SHSindtotals.csv")
+
+#File path to NRS mid-year ind population totals 
+setup$adultpoptotals.path <- paste0(config$datashare.path, "la pop totals.csv")
+
+#File path to NRS mid-year child population totals 
+setup$kidpoptotals.path <- paste0(config$datashare.path, "la child totals.csv")
+
+
+#File path to household subsetted survey data
+<<<<<<< HEAD
+setup$hhsurvdata.path <- paste0(config$sasdata.path, "HHOLD", config$wyear, ".sas7bdat")
+
+#File path to person subsetted survey data
+setup$indsurvdata.path <- paste0(config$sasdata.path, "PERSON", config$wyear, ".sas7bdat")
+
+#File path to random adult subsetted survey data
+setup$randadsurvdata.path <- paste0(config$sasdata.path, "RANDAD", config$wyear, ".sas7bdat")
+
+#File path to random school child subsetted survey data
+setup$randscsurvdata.path <- paste0(config$sasdata.path, "RANDSC", config$wyear, ".sas7bdat")
+=======
+setup$hhsurvdata.path <- paste0(config$sasdata.path, "hhold", config$wyear, ".sas7bdat")
+
+#File path to person subsetted survey data
+setup$indsurvdata.path <- paste0(config$sasdata.path, "person", config$wyear, ".sas7bdat")
+
+#File path to random adult subsetted survey data
+setup$randadsurvdata.path <- paste0(config$sasdata.path, "randad", config$wyear, ".sas7bdat")
+
+#File path to random school child subsetted survey data
+setup$randscsurvdata.path <- paste0(config$sasdata.path, "randsc", config$wyear, ".sas7bdat")
+>>>>>>> aeef993e4c06400e1402d30477e7007f9b813f55

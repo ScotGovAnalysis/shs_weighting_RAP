@@ -12,15 +12,12 @@
 
 #########################################################################
 
-# clear environment
-rm(list=ls())
-
 ### 0 - Setup ----
 
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here::here("Scripts", "00_setup.R"))
+source(here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute travel diary weights script")
@@ -30,9 +27,9 @@ message("Execute travel diary weights script")
 # Add message to inform user about progress
 message("Import data")
 
-randad <- haven::read_sas(config$randadsurvdata.path)
+randad <- read_sas(setup$randadsurvdata.path)
 
-ind_wts <- read_csv(here::here("Outputs", "randad_wts_final.csv"))
+ind_wts <- read_csv(here("Outputs", "randad_wts_final.csv"))
 
 
 ### 2 - Select and reformat variables, and merge datasets ----
@@ -49,7 +46,7 @@ trav_wts <- process_trav_wts(randad, ind_wts)
 message("Calculating day scaling factors")
 
 # Counts number of participants in the dataset
-ads_surv <- dim(randad)[1]
+ads_surv <- nrow(randad)[1]
 
 day_totals <- trav_wts %>%  
   group_by(weekday) %>% 
@@ -164,4 +161,4 @@ message("Exporting travel diary weights")
 trav_wts <- trav_wts %>% 
   select(UNIQID, SHS_trav_wt)
 
-write_csv(trav_wts, here::here("Outputs", "trav_wts_final.csv"))
+write_csv(trav_wts, here("Outputs", "trav_wts_final.csv"))

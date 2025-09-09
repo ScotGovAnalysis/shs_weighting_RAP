@@ -11,15 +11,12 @@
 
 #########################################################################
 
-# clear environment
-rm(list=ls())
-
 ### 0 - Setup ----
 
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here::here("Scripts", "00_setup.R"))
+source(here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute random school child weights script")
@@ -29,15 +26,15 @@ message("Execute random school child weights script")
 # Add message to inform user about progress
 message("Import data")
 
-randsc <- haven::read_sas(config$randscsurvdata.path)
+randsc <- read_sas(setup$randscsurvdata.path)
 
-hhdata <- haven::read_sas(config$indsurvdata.path)
+hhdata <- read_sas(setup$indsurvdata.path)
 
-SHS <- haven::read_sas(config$hhsurvdata.path)
+SHS <- read_sas(setup$hhsurvdata.path)
 
-kidpoptotals <- read_csv(config$kidpoptotals.path)
+kidpoptotals <- read_csv(setup$kidpoptotals.path)
 
-hh_wts <- read_csv(here::here("Outputs", "hh_wts_final.csv")) 
+hh_wts <- read_csv(here("Outputs", "hh_wts_final.csv")) 
 
 
 ### 2 - Rename, create and merge variables ----
@@ -58,7 +55,7 @@ randsc <- randsc %>%
   select(UNIQID, LA, age, ageband, KIDPNO)
 
 # Counts number of participants in the dataset
-kids_surv <- dim(randsc)[1]
+kids_surv <- nrow(randsc)[1]
 
 # rename variables
 # create named LA variable
@@ -333,7 +330,7 @@ randsc_wts <- result$data %>%
   select(UNIQID, LA, numkids, dweight2, int_dweight, ageband, preweight, 
          SHS_kid_wt, SHS_kid_wt_sc)
 
-write_csv(randsc_wts, here::here("Outputs", "kids_wts_final.csv"))
+write_csv(randsc_wts, here("Outputs", "kids_wts_final.csv"))
 
 
 message("Exporting large child weights")
@@ -341,4 +338,4 @@ message("Exporting large child weights")
 large_randsc_wts <- randsc_wts %>% 
   select(UNIQID, LA, numkids, ageband, SHS_kid_wt, SHS_kid_wt_sc)
 
-write_csv(large_randsc_wts, here::here("Outputs", "large_randsc_wts.csv"))
+write_csv(large_randsc_wts, here("Outputs", "large_randsc_wts.csv"))

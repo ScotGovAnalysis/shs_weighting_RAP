@@ -2,7 +2,8 @@
 #' 
 #' @param data Data frame that needs column added
 #' 
-#' @param council_col Variable contains the number code of LA that will correspond to new name variable
+#' @param council_col Variable contains the number code of LA that will 
+#' correspond to new name variable
 #' 
 #' @returns Data frame with new named LA column
 

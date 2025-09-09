@@ -11,15 +11,12 @@
 
 #########################################################################
 
-# clear environment
-rm(list=ls())
-
 ### 0 - Setup ----
 
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here::here("Scripts", "00_setup.R"))
+source(here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute household weights script")
@@ -30,11 +27,16 @@ message("Execute household weights script")
 # Add message to inform user about progress
 message("Import data")
 
-SHS <- haven::read_sas(config$hhsurvdata.path)
+SHS <- read_sas(setup$hhsurvdata.path)
 
-hhdata <- haven::read_sas(config$indsurvdata.path)
+hhdata <- read_sas(setup$indsurvdata.path)
 
-hhpoptotals <- read_csv(config$hhpoptotals.path)
+hhpoptotals <- read_csv(setup$hhpoptotals.path)
+<<<<<<< HEAD
+
+indpoptotals <- read_csv(setup$indpoptotals.path)
+=======
+>>>>>>> aeef993e4c06400e1402d30477e7007f9b813f55
 
 
 ### 2 - Rename, create and merge variables ----
@@ -49,7 +51,7 @@ SHS <- SHS %>%
   select(UNIQID, LA)
 
 # Counts number of participants in the dataset
-hh_surv <- dim(SHS)[1]
+hh_surv <- nrow(SHS)[1]
 
 # LA_Code => Council
 # Assign number LA codes with named LAs
@@ -68,17 +70,18 @@ hhdata <- hhdata %>%
   select(UNIQID, pnum, age, NUMBHH, LA, sex, ageband)
 
 # Counts number of participants in the dataset
-ind_surv <- dim(hhdata)[1]
+ind_surv <- nrow(hhdata)[1]
 
 # Randomly assign those with non-binary gender to either male or female
 # Only needs to be done to the person subsetted dataset
-# check how many are not assigned to male/female
-count(hhdata, sex) # 3 = unassigned gender
-
 hhdata <- assign_gender(hhdata)
 
 # check that 3s have been assigned to male/female
-count(hhdata, sex)
+unique_genders <- sort(unique(hhdata$sex))
+
+if (!all(unique_genders == c(1, 2))) {
+  stop(paste("Sex column must contain only 1 and 2, found:", paste(unique_genders, collapse = ", ")))
+}
 
 # Create new Sex and Age bands for calibration in hhdata (person subsetted dataset)
 # create character variable for sex
@@ -173,7 +176,7 @@ message("Calibration")
 
 result <- calibrate_weights(
   rf.data = hhdata,
-  df.population = read.csv(config$indpoptotals.path),
+  df.population = indpoptotals,
   ids = ~UNIQID,
   strata = NULL,
   model = ~LA:sext:ageband - 1,
@@ -224,10 +227,10 @@ if (nrow(hhwts) == hh_surv) {
   stop(paste("Unexpected data found:", nrow(hhwts), "rows — stopping execution."))
 }
 
-### 9 - calculate adjustment factor ----
+### 9 - calculate and apply adjustment factor ----
 
 # Add message to inform user about progress
-message("Calculating adjustment factor")
+message("Calculating and applying adjustment factor")
 
 # Adjust weights to no. hhs rather than individuals in each LA
 # This is done by calculating the adjustment factor for each LA
@@ -236,26 +239,18 @@ message("Calculating adjustment factor")
 # Attach the hh totals for each LA (pop_totals data frame from earlier) 
 # Calculate adjustment factor for each LA => total no. hhs in LA / weighted total in LA
 # => n / surv_total
-adjustment_factor <- hhwts %>%
-  select(LA, int_SHS_hh_wt) %>%
-  group_by(LA) %>%
-  summarise(surv_total = sum(int_SHS_hh_wt), .groups = "drop") %>%
-  left_join(pop_totals %>% select(LA, n), by = "LA") %>%
-  mutate(adjfct = n / surv_total)
-
-
-### 10 - apply adjustment factor ----
-
-# Add message to inform user about progress
-message("Applying adjustment factor")
-
 hhwts <- hhwts %>%
-  left_join(adjustment_factor %>% select(LA, adjfct), by = "LA") %>%
-  mutate(SHS_hh_wt = adjfct * int_SHS_hh_wt,
-         SHS_hh_wt_sc = SHS_hh_wt * (hh_surv / config$hh_total))
+  group_by(LA) %>%
+  mutate(surv_total = sum(int_SHS_hh_wt), 
+         .groups = "drop") %>%
+  left_join(pop_totals %>% select(LA, n), by = "LA") %>%
+  mutate(adjfct = n / surv_total,
+         SHS_hh_wt = adjfct * int_SHS_hh_wt,
+         SHS_hh_wt_sc = SHS_hh_wt * 
+           (hh_surv / config$hh_total))
 
 
-### 11 - checks ----
+### 10 - checks ----
 
 # Add message to inform user about progress
 message("Weight checking")
@@ -337,7 +332,7 @@ if (wt_sc_check_mean == 1) {
 }
 
 
-### 12 - export ----
+### 11 - export ----
 
 # Add message to inform user about progress
 message("Exporting household weights")
@@ -346,10 +341,10 @@ hhwts <- hhwts %>%
   select(UNIQID, pnum, LA, sext, ageband, dweight, preweight, int_SHS_hh_wt, 
          int_SHS_hh_wt_sc, SHS_hh_wt, SHS_hh_wt_sc)
 
-write_csv(hhwts, here::here("Outputs", "hh_wts_final.csv"))
+write_csv(hhwts, here("Outputs", "hh_wts_final.csv"))
 
 
 message("Exporting large household weights")
 
 large_hh_wts <- large_wts %>% 
-  write_csv(here::here("Outputs", "large_hh_wts.csv"))
+  write_csv(here("Outputs", "large_hh_wts.csv"))

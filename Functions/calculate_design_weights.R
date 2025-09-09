@@ -1,8 +1,10 @@
 #' Calculate desin weights
 #' 
-#' @param data Data frame that contains the formatted survey and population proportions
+#' @param data Data frame that contains the formatted survey and 
+#' population proportions
 #' 
-#' @param calculate_design_weights Will join 2 datasets, rename columns and calculate the dweight
+#' @param calculate_design_weights Will join 2 datasets, rename columns and 
+#' calculate the dweight
 #' 
 #' @returns Data frame correctly formatted and dweight column attached
 
