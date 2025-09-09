@@ -11,15 +11,12 @@
 
 #########################################################################
 
-# clear environment
-rm(list=ls())
-
 ### 0 - Setup ----
 
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here::here("Scripts", "00_setup.R"))
+source(here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute random adult weights script")
@@ -29,11 +26,11 @@ message("Execute random adult weights script")
 # Add message to inform user about progress
 message("Import data")
 
-randad <- haven::read_sas(config$randadsurvdata.path)
+randad <- read_sas(setup$randadsurvdata.path)
 
-hhdata <- haven::read_sas(config$indsurvdata.path)
+hhdata <- read_sas(setup$indsurvdata.path)
 
-SHS <- haven::read_sas(config$hhsurvdata.path)
+SHS <- read_sas(setup$hhsurvdata.path)
 
 adultpoptotals <- read_csv(config$adultpoptotals.path)
 
@@ -277,7 +274,7 @@ randad_wts <- result$data %>%
   select(UNIQID, LA, adsex, adageband, numads, preweight, SHS_ind_wt,
          SHS_ind_wt_sc)
 
-write_csv(randad_wts, here::here("Outputs", "randad_wts_final.csv"))
+write_csv(randad_wts, here("Outputs", "randad_wts_final.csv"))
 
 
 message("Exporting large household weights")
@@ -285,4 +282,4 @@ message("Exporting large household weights")
 large_randad_wts <- large_wts %>% 
   select(LA, adsex, adageband, numads, preweight, SHS_ind_wt, SHS_ind_wt_sc)
 
-write_csv(large_randad_wts, here::here("Outputs", "large_randad_wts.csv"))
+write_csv(large_randad_wts, here("Outputs", "large_randad_wts.csv"))

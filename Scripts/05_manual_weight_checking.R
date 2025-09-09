@@ -14,9 +14,6 @@
 
 ########################################################################
 
-# clear environment
-rm(list=ls())
-
 ### 0 - Setup ----
 
 # Add message to inform user about progress
@@ -25,7 +22,7 @@ message("Execute manual weight checking script")
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here::here("Scripts", "00_setup.R"))
+source(here("Scripts", "00_setup.R"))
 
 
 ### 1 - Import files ----
@@ -33,29 +30,29 @@ source(here::here("Scripts", "00_setup.R"))
 # Add message to inform user about progress
 message("Data import")
 
-hhwts <- read_csv(here::here("Outputs", "hh_wts_final.csv"))
+hhwts <- read_csv(here("Outputs", "hh_wts_final.csv"))
 
-adwts <- read_csv(here::here("Outputs", "randad_wts_final.csv"))
+adwts <- read_csv(here("Outputs", "randad_wts_final.csv"))
 
-kidwts <- read_csv(here::here("Outputs", "kids_wts_final.csv"))
+kidwts <- read_csv(here("Outputs", "kids_wts_final.csv"))
 
-travwts <- read_csv(here::here("Outputs", "trav_wts_final.csv"))
+travwts <- read_csv(here("Outputs", "trav_wts_final.csv"))
 
-ind_large_wts <- read_csv(here::here("Outputs", "large_randad_wts.csv"))
+ind_large_wts <- read_csv(here("Outputs", "large_randad_wts.csv"))
 
-kid_large_wts <- read_csv(here::here("Outputs", "large_randsc_wts.csv"))
+kid_large_wts <- read_csv(here("Outputs", "large_randsc_wts.csv"))
 
-hh_est <- read_csv(config$hhpoptotals.path)
+hh_est <- read_csv(setup$hhpoptotals.path)
 
-ind_est <- read_csv(config$adultpoptotals.path)
+ind_est <- read_csv(setup$adultpoptotals.path)
 
-kid_est <- read_csv(config$kidpoptotals.path)
+kid_est <- read_csv(setup$kidpoptotals.path)
 
 prev_year <- read_csv(paste0(config$prevyear.path, "shs_weights_", config$prevdate, ".csv"))
 
 prev_trav <- read_csv(paste0(config$prevyear.path, "shs_travweight_", config$prevdate, ".csv"))
 
-wb <- loadWorkbook(here::here("Outputs", "SHS final weight checking.xlsx"))
+wb <- loadWorkbook(here("Outputs", "SHS final weight checking.xlsx"))
 
 
 
@@ -144,7 +141,7 @@ writeData(wb, sheet = "Trav weights", x = prev_trav_wts, startRow = 2,
 
 message("Exporting workbook")
 
-saveWorkbook(wb, file = here::here("Outputs", "SHS final weight checking.xlsx"), 
+saveWorkbook(wb, file = here("Outputs", "SHS final weight checking.xlsx"), 
              overwrite = TRUE)
 
 message("Please manually check workbook")

@@ -11,15 +11,12 @@
 
 #########################################################################
 
-# clear environment
-rm(list=ls())
-
 ### 0 - Setup ----
 
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here::here("Scripts", "00_setup.R"))
+source(here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute household weights script")
@@ -30,11 +27,11 @@ message("Execute household weights script")
 # Add message to inform user about progress
 message("Import data")
 
-SHS <- haven::read_sas(config$hhsurvdata.path)
+SHS <- read_sas(setup$hhsurvdata.path)
 
-hhdata <- haven::read_sas(config$indsurvdata.path)
+hhdata <- read_sas(setup$indsurvdata.path)
 
-hhpoptotals <- read_csv(config$hhpoptotals.path)
+hhpoptotals <- read_csv(setup$hhpoptotals.path)
 
 
 ### 2 - Rename, create and merge variables ----
@@ -346,10 +343,10 @@ hhwts <- hhwts %>%
   select(UNIQID, pnum, LA, sext, ageband, dweight, preweight, int_SHS_hh_wt, 
          int_SHS_hh_wt_sc, SHS_hh_wt, SHS_hh_wt_sc)
 
-write_csv(hhwts, here::here("Outputs", "hh_wts_final.csv"))
+write_csv(hhwts, here("Outputs", "hh_wts_final.csv"))
 
 
 message("Exporting large household weights")
 
 large_hh_wts <- large_wts %>% 
-  write_csv(here::here("Outputs", "large_hh_wts.csv"))
+  write_csv(here("Outputs", "large_hh_wts.csv"))

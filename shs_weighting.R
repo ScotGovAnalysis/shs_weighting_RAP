@@ -13,48 +13,45 @@
 
 #########################################################################
 
-# clear environment
-rm(list=ls())
-
 ### 0 - Setup ----
 
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here::here("Scripts", "00_setup.R"))
+source(here("Scripts", "00_setup.R"))
 
 
 ### 1 - Household weights ----
 
 # Runs the household weights script
-source(here::here("Scripts", "01_household_weights.R"))
+source(here("Scripts", "01_household_weights.R"))
 
 
 ### 2 - Random adult weights ----
 
 # Runs the random adult weights script
-source(here::here("Scripts", "02_randad_weights.R"))
+source(here("Scripts", "02_randad_weights.R"))
 
 
 ### 3 - Random school child weights ----
 
 # Runs the random school child weights script
-source(here::here("Scripts", "03_randsc_weights.R"))
+source(here("Scripts", "03_randsc_weights.R"))
 
 
 ### 4 - Travel diary weights ----
 
 # Runs the travel weights script
-source(here::here("Scripts", "04_travel_weights.R"))
+source(here("Scripts", "04_travel_weights.R"))
 
 
 ### 5 - Manual weight checking ----
 
 # Runs the manual weight checking script
-source(here::here("Scripts", "05_manual_weight_checking.R"))
+source(here("Scripts", "05_manual_weight_checking.R"))
 
 
 ### 6 - Collate the weights ----
 
 # Runs the collate weights script
-source(here::here("Scripts", "06_collate_weights.R"))
+source(here("Scripts", "06_collate_weights.R"))
