@@ -32,12 +32,8 @@ SHS <- read_sas(setup$hhsurvdata.path)
 hhdata <- read_sas(setup$indsurvdata.path)
 
 hhpoptotals <- read_csv(setup$hhpoptotals.path)
-<<<<<<< HEAD
 
 indpoptotals <- read_csv(setup$indpoptotals.path)
-=======
->>>>>>> aeef993e4c06400e1402d30477e7007f9b813f55
-
 
 ### 2 - Rename, create and merge variables ----
 

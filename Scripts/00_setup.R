@@ -60,18 +60,6 @@ setup$kidpoptotals.path <- paste0(config$datashare.path, "la child totals.csv")
 
 
 #File path to household subsetted survey data
-<<<<<<< HEAD
-setup$hhsurvdata.path <- paste0(config$sasdata.path, "HHOLD", config$wyear, ".sas7bdat")
-
-#File path to person subsetted survey data
-setup$indsurvdata.path <- paste0(config$sasdata.path, "PERSON", config$wyear, ".sas7bdat")
-
-#File path to random adult subsetted survey data
-setup$randadsurvdata.path <- paste0(config$sasdata.path, "RANDAD", config$wyear, ".sas7bdat")
-
-#File path to random school child subsetted survey data
-setup$randscsurvdata.path <- paste0(config$sasdata.path, "RANDSC", config$wyear, ".sas7bdat")
-=======
 setup$hhsurvdata.path <- paste0(config$sasdata.path, "hhold", config$wyear, ".sas7bdat")
 
 #File path to person subsetted survey data
@@ -82,4 +70,4 @@ setup$randadsurvdata.path <- paste0(config$sasdata.path, "randad", config$wyear,
 
 #File path to random school child subsetted survey data
 setup$randscsurvdata.path <- paste0(config$sasdata.path, "randsc", config$wyear, ".sas7bdat")
->>>>>>> aeef993e4c06400e1402d30477e7007f9b813f55
+
