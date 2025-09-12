@@ -145,3 +145,15 @@ saveWorkbook(wb, file = here("Outputs", "SHS final weight checking.xlsx"),
              overwrite = TRUE)
 
 message("Please manually check workbook")
+
+
+# Ask the user a question
+answer <- readline(prompt = "Have you manually checked the workbook? Type 'yes' to proceed: ")
+
+# Keep asking until they type "yes"
+while (tolower(answer) != "yes") {
+  cat("You must type 'yes' to continue.\n")
+  answer <- readline(prompt = "Have you manually checked the workbook? Type 'yes' to proceed: ")
+}
+
+cat("Proceeding...\n")

@@ -17,6 +17,8 @@
 
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
+install.packages("here")
+library(here)
 
 source(here("Scripts", "00_setup.R"))
 
