@@ -5,7 +5,8 @@ This repository contains the Reproducible Analytical Pipeline (RAP) for the Scot
 The only file that needs to be updated before running the shs_weighting_RAP is the config.R file.
 
 # Running the RAP
-To run the RAP, execute the shs_weighting.R file which automatically loads the config.R file, the 00_setup.R file and all functions in the functions folder.
+To run the RAP, first download the zip folder of the RAP and save it to the correct folder on the datashare. The config.R file will need to be copied from the previous year's weighting folder, then it can be updated with the new file paths.
+To execute the shs_weighting.R file which automatically loads the config.R file, the 00_setup.R file and all functions in the functions folder.
 
 # Licence
 This repository is available under the Open Government Licence v3.0.
