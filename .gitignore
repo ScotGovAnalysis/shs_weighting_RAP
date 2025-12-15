@@ -5,3 +5,21 @@
 
 # File with absolute file paths #
 config.R
+
+# Common text files that may contain data #
+*.[cC][sS][vV]
+*.[tT][xX][tT]
+
+# Excel files #
+*.[xX][lL][sS]*
+!SHS_checking_template.xlsx
+
+# SPSS formats #
+*.[sS][aA][vV]
+
+# SAS format #
+*.[sS][aA][sS]7[bB][dD][aA][tT]
+
+# R data files #
+*.[rR][dD][aA][tT][aA]
+*.[rR][dD][sS]

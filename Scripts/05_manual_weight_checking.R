@@ -52,7 +52,7 @@ prev_year <- read_csv(paste0(config$prevyear.path, "shs_weights_", config$prevda
 
 prev_trav <- read_csv(paste0(config$prevyear.path, "shs_travweight_", config$prevdate, ".csv"))
 
-wb <- loadWorkbook(here("Outputs", "SHS final weight checking.xlsx"))
+wb <- loadWorkbook(here("Outputs", "SHS_checking_template.xlsx"))
 
 
 
