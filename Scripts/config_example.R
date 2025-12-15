@@ -18,23 +18,24 @@ config <- list()
 
 # Year the data is being weighted for (usually the previous calendar year)
 # (i.e., 20XX)
-config$wyear <- xx
+# last two digits only!
+config$wyear <- YY
 
-config$prevdate <- xx
+# date when previous year's weights were produced (should be in last year's filename)
+config$prevdate <- YYYYMMDD
 
 ### 2 - File paths - TO UPDATE ----
 
 # This section may need to be updated if the data storage location has changed
 
 # Path to data share
-config$datashare.path <- paste0("xxxx")
+config$datashare.path <- "xxxx"
+
+# Path to previous year's folder
+config$prevyear.path <- "xxxx"
 
 # Path to SAS data
 config$sasdata.path <- "xxxx"
-
-# Path to previous year's folder
-config$prevyear.path <- paste0("xxx", config$prevyear, " xxx", config$prevyear, "/")
-
 
 ### 3 - Survey and population totals - TO UPDATE ----
 
