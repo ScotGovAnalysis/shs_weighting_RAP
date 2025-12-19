@@ -16,7 +16,7 @@
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here("Scripts", "00_setup.R"))
+source(here::here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute random school child weights script")
@@ -88,6 +88,10 @@ count(hhdata, sex)
 #hhdata <- hhdata %>% 
  # filter(indexp == kidpno)
 
+# filter out children who are 18
+randsc <- randsc %>%
+  left_join(SHS, by = 'UNIQID')
+
 # create character variable for sex
 randsc <- randsc %>%
   left_join(hhdata %>% select(UNIQID, sex, econ, pnum), by = c("UNIQID")) %>%
@@ -103,7 +107,7 @@ randsc <- randsc %>% filter(pnum == KIDPNO)
 message("Survey and population proportions")
 
 # Survey proportions by LA => uses SHS24 (hh subsetted dataset)
-survey_totals <- survey_proportions_hh(randsc, LA)
+survey_totals <- survey_proportions(randsc, LA, numkids)
 
 # Check if the cumulative % equals 100.000000
 if (survey_totals[32, 4] == 100.000000) {
@@ -128,13 +132,14 @@ if (pop_totals[32, 4] == 100.000000) {
 # Add message to inform user about progress
 message("Calculating adjustment factor")
 
-adjustment_factor <- SHS %>%
+adjustment_factor <- randsc %>%
   summarise(total_kids = sum(numkids), .groups = "drop") %>%
   mutate(adjfct = kids_surv / total_kids)
 
 adjfct <- adjustment_factor$adjfct
 
 randsc <- randsc %>% 
+  select(-numkids) %>%
   left_join(SHS %>% select(UNIQID, numkids), by = c("UNIQID"))
 
 ### 5 - dweight calculation ----
@@ -195,7 +200,7 @@ kids_pop_totals <- hhdata %>%
 kids_pop_totals <- kids_pop_totals %>% 
   group_by(LA, ageband) %>% 
   summarise(n = sum(SHS_hh_wt, na.rm = TRUE)) %>% 
-  mutate(n = round(n), #rounds to whole number
+  mutate(n = round_half_up(n), #rounds to whole number
          percent = n / sum(n) * 100)
 
 kids_pop_est <- kids_pop_totals %>%
@@ -313,7 +318,7 @@ if (abs(wt_sc_check_sum - kids_surv) < 1e-8) {
              Halting execution."))
 }
 
-if (wt_sc_check_mean == 1) {
+if (all.equal(wt_sc_check_mean, 1)) {
   print("Mean is 1, continuing...")
 } else {
   stop("Mean is not 1, stopping execution.")
