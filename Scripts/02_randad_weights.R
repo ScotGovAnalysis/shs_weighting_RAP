@@ -16,7 +16,7 @@
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here("Scripts", "00_setup.R"))
+source(here::here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute random adult weights script")
@@ -104,7 +104,7 @@ randad <- randad %>% filter(pnum == RANDPEO)
 message("Survey and population proportions")
 
 # Survey proportions by LA => uses SHS24 (hh subsetted dataset)
-survey_totals <- survey_proportions_hh(randad, LA)
+survey_totals <- survey_proportions(randad, LA, numads)
 
 # Check if the cumulative % equals 100.000000
 if (survey_totals[32, 4] == 100.000000) {
