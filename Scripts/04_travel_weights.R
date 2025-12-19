@@ -17,7 +17,7 @@
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here("Scripts", "00_setup.R"))
+source(here::here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute travel diary weights script")
@@ -51,12 +51,12 @@ ads_surv <- nrow(randad)[1]
 day_totals <- trav_wts %>%  
   group_by(weekday) %>% 
   summarise(n = n(),
-            weighted_n = sum(SHS_ind_wt, na.rm = TRUE)) %>% 
+            weighted_n = sum(SHS_ind_wt_sc, na.rm = TRUE)) %>% 
   mutate(percent = weighted_n / sum(weighted_n) * 100,
          cumul = cumsum(percent))
 
 # Check if the cumulative % equals 100.000000
-if (day_totals[7, 5] == 100.000000) {
+if (all.equal(day_totals[[7, 5]], 100.000000)) {
   print("Day estimate total is 100.000000, continuing...")
 } else {
   stop("Day estimate total is not 100.000000, stopping execution.")
@@ -70,7 +70,7 @@ day_totals<- day_totals %>%
 trav_wts <- trav_wts %>% 
   recode_econ_status() %>% 
   left_join(day_totals %>% select(weekday, Day_i_scaling_factor), by = c("weekday")) %>% 
-  mutate(int_wt = SHS_ind_wt * Day_i_scaling_factor)
+  mutate(int_wt = SHS_ind_wt_sc * Day_i_scaling_factor)
 
 
 ### 4 - Econ Scaling factors ----
