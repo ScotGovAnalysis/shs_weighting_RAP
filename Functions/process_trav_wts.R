@@ -11,7 +11,7 @@ process_trav_wts <- function(randad, ind_wts) {
     dplyr::select(UNIQID, R_DATE, HA7)
   
   ind_wts <- ind_wts %>% 
-    dplyr::select(UNIQID, SHS_ind_wt)
+    dplyr::select(UNIQID, SHS_ind_wt_sc)
   
   # Join and mutate
   trav_wts <- randad %>% 
