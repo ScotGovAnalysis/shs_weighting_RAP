@@ -20,9 +20,9 @@ message("Execute collate weights script")
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here("Scripts", "00_setup.R"))
+source(here::here("Scripts", "00_setup.R"))
 
-wt_date <- Sys.Date()
+wt_date <- gsub("-", "", Sys.Date())
 
 ### 1 - Import files ----
 
@@ -43,19 +43,19 @@ travwts <- read_csv(here("Outputs", "trav_wts_final.csv"))
 message("Tidying the datasets up")
 
 hhwts <- hhwts %>% 
-  select(UNIQID, SHS_hh_wt, SHS_hh_wt_sc) %>% 
-  rename(LA_WT = SHS_hh_wt,
-         LA_GRWT = SHS_hh_wt_sc)
+  select(UNIQID, SHS_hh_wt_sc, SHS_hh_wt) %>% 
+  rename(LA_GRWT = SHS_hh_wt,
+         LA_WT = SHS_hh_wt_sc)
 
 adwts <- adwts %>% 
-  select(UNIQID, SHS_ind_wt, SHS_ind_wt_sc) %>% 
-  rename(IND_WT = SHS_ind_wt,
-         IND_GRWT = SHS_ind_wt_sc)
+  select(UNIQID, SHS_ind_wt_sc, SHS_ind_wt) %>% 
+  rename(IND_GRWT = SHS_ind_wt,
+         IND_WT = SHS_ind_wt_sc)
 
 kidwts <- kidwts %>% 
-  select(UNIQID, SHS_kid_wt, SHS_kid_wt_sc) %>% 
-  rename(KID_WT = SHS_kid_wt,
-         KID_GRWT = SHS_kid_wt_sc)
+  select(UNIQID, SHS_kid_wt_sc, SHS_kid_wt) %>% 
+  rename(KID_GRWT = SHS_kid_wt,
+         KID_WT = SHS_kid_wt_sc)
 
 
 ### 3 - Join the datasets together ----
@@ -67,7 +67,6 @@ SHS_wts <- hhwts %>%
   full_join(adwts, by = "UNIQID") %>% 
   full_join(kidwts, by = "UNIQID") %>% 
   full_join(travwts, by = "UNIQID")
-
 
 ### 4 - Export ----
 
