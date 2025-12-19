@@ -16,7 +16,7 @@
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here("Scripts", "00_setup.R"))
+source(here::here("Scripts", "00_setup.R"))
 
 # Add message to inform user about progress
 message("Execute household weights script")

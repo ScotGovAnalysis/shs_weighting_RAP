@@ -22,7 +22,7 @@ message("Execute manual weight checking script")
 # Run setup script which loads all required packages and functions and 
 # executes the config.R script.
 
-source(here("Scripts", "00_setup.R"))
+source(here::here("Scripts", "00_setup.R"))
 
 
 ### 1 - Import files ----
@@ -63,7 +63,6 @@ hhwts_tab <- hhwts[, 1:9] #selects the 9 columns needed for the hhwts tab
 
 writeData(wb, sheet = "hhwts", x = hhwts_tab, startRow = 2, 
           startCol = 2, colNames = FALSE, rowNames = FALSE)
-
 
 ### 3 - dweight tab ----
 dweight_tab <- hh_est %>%
