@@ -152,7 +152,7 @@ pre_calib <- distribution_check(SHS, GR_dweight)
 pre_calib_check <- pre_calib$sum
 
 # Compare the sum to a target (e.g., 100)
-if (abs(pre_calib_check - config$hh_total)) {
+if (abs(pre_calib_check - config$hh_total) < 1e-8) {
   print("Sum of GR_dweight matches total adult population of Scotland, continuing...")
   
   # Continue with your analysis...
