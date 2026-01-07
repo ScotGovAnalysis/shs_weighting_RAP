@@ -55,6 +55,15 @@ config$ads_total <- xxxx
 config$kids_total <- xxxx
 #this is obtained from SHS 20xx Population Source workbook, People tab
 
+### 4 - Missing dates for travel weights - TO UPDATE (if dates are missing) ----
+
+# if no dates are missing, keep df empty
+# always start with an empty df 
+# if dates are missing, R will flag this when the travel weights are created
+missing_dates <- tibble::tribble(
+  ~UNIQID, ~date,
+  #xxxxxxxxx, as.Date("YYYY-MM-DD")
+)
 
 
 

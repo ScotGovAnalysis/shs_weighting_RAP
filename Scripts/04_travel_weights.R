@@ -48,6 +48,25 @@ message("Calculating day scaling factors")
 # Counts number of participants in the dataset
 ads_surv <- nrow(randad)[1]
 
+# Add missing dtaes if manually specified in config.R
+  if(nrow(missing_dates != 0)) {
+    trav_wts <- trav_wts %>% 
+      left_join(missing_dates %>% rename(date_fill = date), by = "UNIQID") %>%
+      mutate(r_date = if_else(is.na(r_date), date_fill, r_date),
+             R_DATE = r_date,
+             weekday = substr(weekdays(r_date), 1, 3)) %>%
+      select(-date_fill)
+  }
+
+# Check if all observations have r_date
+if (nrow(trav_wts %>% filter(is.na(r_date) == TRUE)) == 0) {
+  print("The date for all interviews has been recorded, continuing...")
+} else {
+  stop("The date for UNIQID ", as.numeric(trav_wts %>% filter(is.na(r_date) == TRUE) %>% pull(UNIQID)),
+       "is missing, stopping execution. Manually add date to config file and execute again.")
+}
+
+
 day_totals <- trav_wts %>%  
   group_by(weekday) %>% 
   summarise(n = n(),
