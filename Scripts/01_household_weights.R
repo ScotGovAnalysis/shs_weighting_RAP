@@ -69,6 +69,7 @@ hhdata <- hhdata %>%
 ind_surv <- nrow(hhdata)[1]
 
 # Randomly assign those with non-binary gender to either male or female
+# to to align with NRS population estimates needed for calibration
 # Only needs to be done to the person subsetted dataset
 hhdata <- assign_gender(hhdata)
 

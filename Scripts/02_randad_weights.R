@@ -73,6 +73,7 @@ hhdata <- hhdata %>%
   left_join(SHS %>% select(UNIQID, numads), by = c("UNIQID"))
 
 # Randomly assign those with non-binary gender to either male or female
+# to align with NRS population estimates needed for calibration
 # Only needs to be done to the person subsetted dataset
 # check how many are not assigned to male/female
 count(hhdata, sex) # 3 = unassigned gender

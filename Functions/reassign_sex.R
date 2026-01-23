@@ -1,4 +1,5 @@
 #' Randomly assign those with non-binary gender to either male or female
+#' to align with NRS population estimates needed for calibration
 #' 
 #' @param data Data frame which includes the the sex variable
 #' 
