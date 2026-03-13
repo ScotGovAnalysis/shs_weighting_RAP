@@ -26,4 +26,7 @@ IF R IS UPDATED BY SCOTS MAKE SURE TO UPDATE ALL THE PACKAGES
 This can be done using this code: install.packages("package name")
 
 # Licence
-This repository is available under the Open Government Licence v3.0.
+Unless stated otherwise, the codebase is released under [the MIT License](LICENSE). This covers both the codebase and any sample code in the documentation.
+
+The documentation is [© Crown copyright](https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/) and available under the terms
+of the [Open Government 3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) licence.
