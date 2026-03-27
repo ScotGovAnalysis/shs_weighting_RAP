@@ -27,7 +27,7 @@ message("Execute travel diary weights script")
 # Add message to inform user about progress
 message("Import data")
 
-randad <- read_sas(setup$randadsurvdata.path)
+randad <- sas_excel_import(setup$randadsurvdata.path)
 
 ind_wts <- read_csv(here("Outputs", "randad_wts_final.csv"))
 

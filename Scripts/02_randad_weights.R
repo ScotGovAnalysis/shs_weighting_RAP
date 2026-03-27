@@ -26,11 +26,11 @@ message("Execute random adult weights script")
 # Add message to inform user about progress
 message("Import data")
 
-randad <- read_sas(setup$randadsurvdata.path)
+randad <- sas_excel_import(setup$randadsurvdata.path)
 
-hhdata <- read_sas(setup$indsurvdata.path)
+hhdata <- sas_excel_import(setup$indsurvdata.path)
 
-SHS <- read_sas(setup$hhsurvdata.path)
+SHS <- sas_excel_import(setup$hhsurvdata.path)
 
 adultpoptotals <- read_csv(setup$adultpoptotals.path)
 

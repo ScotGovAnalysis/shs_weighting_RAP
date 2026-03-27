@@ -60,14 +60,26 @@ setup$kidpoptotals.path <- paste0(config$datashare.path, "la child totals.csv")
 
 
 #File path to household subsetted survey data
-setup$hhsurvdata.path <- paste0(config$sasdata.path, "hhold", config$wyear, ".sas7bdat")
+setup$hhsurvdata.path <- ifelse(config$raw == 'yes',
+       paste0(config$datashare.path, "household_shs_20", config$wyear, ".csv"),
+       paste0(config$sasdata.path, "hhold", config$wyear, ".sas7bdat")
+       )
 
 #File path to person subsetted survey data
-setup$indsurvdata.path <- paste0(config$sasdata.path, "person", config$wyear, ".sas7bdat")
+setup$indsurvdata.path <- ifelse(config$raw == 'yes',
+                                paste0(config$datashare.path, "person_shs_20", config$wyear, ".csv"),
+                                paste0(config$sasdata.path, "person", config$wyear, ".sas7bdat")
+)
 
 #File path to random adult subsetted survey data
-setup$randadsurvdata.path <- paste0(config$sasdata.path, "randad", config$wyear, ".sas7bdat")
+setup$randadsurvdata.path <- ifelse(config$raw == 'yes',
+                                paste0(config$datashare.path, "randad_shs_20", config$wyear, ".csv"),
+                                paste0(config$sasdata.path, "randad", config$wyear, ".sas7bdat")
+)
 
 #File path to random school child subsetted survey data
-setup$randscsurvdata.path <- paste0(config$sasdata.path, "randsc", config$wyear, ".sas7bdat")
+setup$randscsurvdata.path <- ifelse(config$raw == 'yes',
+                                paste0(config$datashare.path, "child_shs_20", config$wyear, ".csv"),
+                                paste0(config$sasdata.path, "randsc", config$wyear, ".sas7bdat")
+)
 

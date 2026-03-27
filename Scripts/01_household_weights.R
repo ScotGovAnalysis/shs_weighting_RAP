@@ -27,9 +27,9 @@ message("Execute household weights script")
 # Add message to inform user about progress
 message("Import data")
 
-SHS <- read_sas(setup$hhsurvdata.path)
+SHS <- sas_excel_import(setup$hhsurvdata.path)
 
-hhdata <- read_sas(setup$indsurvdata.path)
+hhdata <- sas_excel_import(setup$indsurvdata.path)
 
 hhpoptotals <- read_csv(setup$hhpoptotals.path)
 
@@ -322,7 +322,7 @@ if (abs(wt_sc_check_sum - hh_surv) < 1e-8) {
              Halting execution."))
 }
 
-if (wt_sc_check_mean == 1) {
+if (all.equal(wt_sc_check_mean, 1)) {
   print("Mean is 1, continuing...")
 } else {
   stop("Mean is not 1, stopping execution.")

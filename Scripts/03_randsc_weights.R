@@ -26,11 +26,11 @@ message("Execute random school child weights script")
 # Add message to inform user about progress
 message("Import data")
 
-randsc <- read_sas(setup$randscsurvdata.path)
+randsc <- sas_excel_import(setup$randscsurvdata.path)
 
-hhdata <- read_sas(setup$indsurvdata.path)
+hhdata <- sas_excel_import(setup$indsurvdata.path)
 
-SHS <- read_sas(setup$hhsurvdata.path)
+SHS <- sas_excel_import(setup$hhsurvdata.path)
 
 kidpoptotals <- read_csv(setup$kidpoptotals.path)
 

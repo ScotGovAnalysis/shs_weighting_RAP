@@ -50,7 +50,7 @@ kid_est <- read_csv(setup$kidpoptotals.path)
 
 prev_year <- read_csv(paste0(config$prevyear.path, "shs_weights_", config$prevdate, ".csv"))
 
-prev_trav <- read_csv(paste0(config$prevyear.path, "shs_travweight_", config$prevdate, ".csv"))
+prev_trav <- read_csv(paste0(config$prevyear.path, "shs_travweight_", config$prevtravdate, ".csv"))
 
 wb <- loadWorkbook(here("Outputs", "SHS_checking_template.xlsx"))
 
