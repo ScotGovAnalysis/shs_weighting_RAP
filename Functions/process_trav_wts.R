@@ -6,6 +6,13 @@
 
 
 process_trav_wts <- function(randad, ind_wts) {
+  
+  if(! 'R_DATE' %in% names(randad)){
+    # Create R_DATE variable if it doesn't exist already
+    randad <- randad %>% 
+      mutate(R_DATE = paste(r_year, r_month, r_day, sep = '-'))
+  }
+  
   # Select relevant columns
   randad <- randad %>% 
     dplyr::select(UNIQID, R_DATE, HA7)
